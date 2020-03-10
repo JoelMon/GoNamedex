@@ -22,12 +22,7 @@ var (
 	letterToReplace6 = []string{"r"}
 )
 
-// Create takes a name and returns the corresponding soundex
-// for the name.
-//
-//NOTE
-//
-// Implimentation incomplete.
+// Create takes a string and returns the corresponding soundex.
 func Create(name string) (string, error) {
 
 	rInitial := []rune(name)

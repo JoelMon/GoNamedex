@@ -157,9 +157,52 @@ func TestStripPad(t *testing.T) {
 	}
 }
 
-func ExampleCreate() {
+func ExampleCreate_Joel() {
 	name := "Joel"
 	soundex, _ := Create(name)
 	fmt.Println(soundex)
 	// Output: J400
+}
+func ExampleCreate_Rupert() {
+	name := "Rupert"
+	soundex, _ := Create(name)
+	fmt.Println(soundex)
+	// Output: R163
+}
+func ExampleCreate_Robert() {
+	name := "Robert"
+	soundex, _ := Create(name)
+	fmt.Println(soundex)
+	// Output: R163
+}
+func ExampleCreate_Tymczak() {
+	name := "Tymczak"
+	soundex, _ := Create(name)
+	fmt.Println(soundex)
+	// Output: T522
+}
+func ExampleCreate_Pfister() {
+	name := "Pfister"
+	soundex, _ := Create(name)
+	fmt.Println(soundex)
+	// Output: P236
+}
+func ExampleCreate_Honeyman() {
+	name := "Honeyman"
+	soundex, _ := Create(name)
+	fmt.Println(soundex)
+	// Output: H555
+}
+
+func ExampleCreate_Ashcraft() {
+	name := "Ashcraft"
+	soundex, _ := Create(name)
+	fmt.Println(soundex)
+	// Output: A261
+}
+func ExampleCreate_Ashcroft() {
+	name := "Ashcroft"
+	soundex, _ := Create(name)
+	fmt.Println(soundex)
+	// Output: A261
 }
