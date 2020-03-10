@@ -238,3 +238,78 @@ var removeDupTestCases = []struct {
 		expected:    "123h4a2456h7",
 	},
 }
+
+var removeFirstNumberTestCases = []struct {
+	description   string
+	input         string
+	expected      string
+	errorExpected bool
+}{
+	{
+		description: "removeFirstNumber() - single",
+		input:       "a",
+		expected:    "",
+	},
+	{
+		description: "removeFirstNumber() - medium",
+		input:       "234563546",
+		expected:    "34563546",
+	},
+}
+
+var removeDroppedLettersTestCases = []struct {
+	description   string
+	input         string
+	expected      string
+	errorExpected bool
+}{
+	{
+		description: "removeDroppedLetters() - small",
+		input:       "joel",
+		expected:    "jl",
+	},
+
+	{
+		description: "removeDroppedLetters() - medium",
+		input:       "roberty",
+		expected:    "rbrt",
+	},
+}
+
+var stripPadTestCases = []struct {
+	description   string
+	input         string
+	expected      string
+	errorExpected bool
+}{
+	{
+		description: "stripPad() - 0",
+		input:       "",
+		expected:    "000",
+	},
+	{
+		description: "stripPad() - 1",
+		input:       "1",
+		expected:    "100",
+	},
+	{
+		description: "stripPad() - 2",
+		input:       "12",
+		expected:    "120",
+	},
+	{
+		description: "stripPad() - 3",
+		input:       "123",
+		expected:    "123",
+	},
+	{
+		description: "stripPad() - 4",
+		input:       "1234",
+		expected:    "123",
+	},
+	{
+		description: "stripPad() - 5",
+		input:       "12345",
+		expected:    "123",
+	},
+}

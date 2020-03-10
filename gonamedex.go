@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"strings"
 	"unicode"
+	"unicode/utf8"
 )
 
 // Various arrays of letters that has to be replaced or dropped
@@ -29,10 +30,21 @@ var (
 // Implimentation incomplete.
 func Create(name string) (string, error) {
 
-	convert, err := makeLower(name)
+	rInitial := []rune(name)
+	rInit := rInitial[0]
+
+	soundex, err := makeLower(name)
 	if err != nil {
 		fmt.Println(err)
 	}
+	soundex, _ = convertToNumber(soundex)
+	soundex, _ = removeDup(soundex)
+	soundex, _ = removeFirstNumber(soundex)
+	soundex, _ = removeDroppedLetters(soundex)
+	soundex, _ = stripPad(soundex)
+
+	sInitial := string(rInit)
+	convert := sInitial + soundex
 	return convert, nil
 }
 
@@ -138,4 +150,50 @@ func removeDup(name string) (string, error) {
 	sName := string(rName)
 	sName = strings.Replace(sName, "?", "", -1)
 	return sName, nil
+}
+
+// removeFirstNumber returns the name string without the first character.
+func removeFirstNumber(name string) (string, error) {
+	return name[1:], nil
+}
+
+func removeDroppedLetters(name string) (string, error) {
+
+	var newName []string
+	for _, letter := range name {
+		if contains(letterToDrop, string(letter)) {
+			newName = append(newName, "?")
+		} else {
+			newName = append(newName, string(letter))
+		}
+
+	}
+
+	sName := strings.Join(newName, "")
+	sName = strings.Replace(sName, "?", "", -1)
+
+	return sName, nil
+
+}
+
+// stripPad takes a string and if more than three charactors are passed in, then
+// only the first three charactors are kept. If the string is shorter
+// than three charactors then the string is padded with '0' until it
+// is three charactors long.
+func stripPad(name string) (string, error) {
+	rName := []rune(name)
+
+	if utf8.RuneCountInString(name) == 0 {
+		return "000", nil
+	} else if utf8.RuneCountInString(name) > 3 {
+		return name[:3], nil
+	} else if utf8.RuneCountInString(name) < 3 {
+		for len(rName) < 3 {
+			rName = append(rName, '0')
+		}
+
+		sName := string(rName)
+		name = sName
+	}
+	return name, nil
 }
