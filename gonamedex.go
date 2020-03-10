@@ -111,3 +111,31 @@ func contains(slice []string, letter string) bool {
 	}
 	return false
 }
+
+// removeDup removes numbers that are duplicated following the algorithm
+// set by the soundex.
+func removeDup(name string) (string, error) {
+
+	rName := []rune(name)
+	// lastLetter holds the last letter compared in the for loop.
+	lastLetter := rName[0]
+
+	for i, letter := range rName[1:] {
+		if letter == lastLetter {
+			rName[i] = '?'
+			lastLetter = letter
+		} else if (letter == 'h' || letter == 'w') && (i+2 < len(rName)) {
+			if rName[i] == rName[i+2] {
+				rName[i] = '?'
+				lastLetter = letter
+			}
+
+		} else {
+			lastLetter = letter
+		}
+	}
+
+	sName := string(rName)
+	sName = strings.Replace(sName, "?", "", -1)
+	return sName, nil
+}
