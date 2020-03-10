@@ -32,8 +32,8 @@ func TestMakeLower(t *testing.T) {
 }
 
 func TestConvertToNumber(t *testing.T) {
-	for _, test := range ConvertToNumberTestCases {
-		got, err := ConvertToNumber(test.input)
+	for _, test := range convertToNumberTestCases {
+		got, err := convertToNumber(test.input)
 
 		if test.errorExpected {
 			// check if err is of type error
@@ -50,28 +50,8 @@ func TestConvertToNumber(t *testing.T) {
 		}
 
 		if got != test.expected {
-			t.Fatalf("FAIL: %s - Expected %v but got %v with input %v", test.description, test.expected, got, test.input)
+			t.Fatalf("FAIL: %s - Expected %q but got %q with input %q", test.description, test.expected, got, test.input)
 		}
 		t.Logf("Passed - %s", test.description)
 	}
 }
-
-// func ExampleCreate() {
-// 	name, _ := Create("Joel")
-// 	fmt.Println(name)
-// 	//Output: joel
-// }
-
-// func ExampleConvertToNumber() {
-// 	name := ConvertToNumber("Joel")
-// 	fmt.Println(name)
-// 	//Output: 2oe4
-// }
-
-// func ExampleContains() {
-// 	var listRunes = []rune{'a', 'e', 'o'}
-
-// 	inList := Contains(listRunes, 'a')
-// 	fmt.Println(inList)
-// 	// Output: true
-// }

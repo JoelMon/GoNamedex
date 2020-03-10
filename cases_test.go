@@ -93,30 +93,65 @@ var makeLowerTestCases = []struct {
 	},
 }
 
-var ConvertToNumberTestCases = []struct {
+var convertToNumberTestCases = []struct {
 	description   string
 	input         string
-	expected      bool
+	expected      string
 	errorExpected bool
 }{
 	{
-		description: "ConvertToNumber() - letterToReplace1 - b",
+		description: "convertToNumber() - letterToReplace1 - b",
 		input:       "b",
-		expected:    true,
+		expected:    "1",
 	},
 	{
-		description: "ConvertToNumber() - letterToReplace1 - f",
-		input:       "f",
-		expected:    true,
+		description: "convertToNumber() - letterToReplace1 - bfp",
+		input:       "bfp",
+		expected:    "111",
 	},
 	{
-		description: "ConvertToNumber() - letterToReplace1 - p",
-		input:       "p",
-		expected:    true,
+		description: "convertToNumber() - letterToReplace2 - cgjkqsxz",
+		input:       "cgjkqsxz",
+		expected:    "22222222",
 	},
 	{
-		description: "ConvertToNumber() - letterToReplace1 - !j",
-		input:       "j",
-		expected:    false,
+		description: "convertToNumber() - letterToReplace3 - dt",
+		input:       "dt",
+		expected:    "33",
+	},
+	{
+		description: "convertToNumber() - letterToReplace4 - l",
+		input:       "l",
+		expected:    "4",
+	},
+	{
+		description: "convertToNumber() - letterToReplace5 - mn",
+		input:       "mn",
+		expected:    "55",
+	},
+	{
+		description: "convertToNumber() - letterToReplace6 - r",
+		input:       "r",
+		expected:    "6",
+	},
+	{
+		description: "convertToNumber() - letterToReplace - joel",
+		input:       "joel",
+		expected:    "2oe4",
+	},
+	{
+		description: "convertToNumber() - letterToReplace - frank",
+		input:       "frank",
+		expected:    "16a52",
+	},
+	{
+		description: "convertToNumber() - letterToReplace - amy",
+		input:       "amy",
+		expected:    "a5y",
+	},
+	{
+		description: "convertToNumber() - letterToReplace - leroy",
+		input:       "leroy",
+		expected:    "4e6oy",
 	},
 }

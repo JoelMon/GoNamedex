@@ -12,13 +12,13 @@ import (
 // Various arrays of letters that has to be replaced or dropped
 // when creating the soundex.
 var (
-	letterToDrop     = []rune{'a', 'e', 'i', 'o', 'u', 'y', 'h', 'w'}
-	letterToReplace1 = []rune{'b', 'f', 'p', 'v'}
-	letterToReplace2 = []rune{'c', 'g', 'j', 'k', 'q', 's', 'x', 'z'}
-	letterToReplace3 = []rune{'d', 't'}
-	letterToReplace4 = []rune{'l'}
-	letterToReplace5 = []rune{'m', 'n'}
-	letterToReplace6 = []rune{'r'}
+	letterToDrop     = []string{"a", "e", "i", "o", "u", "y", "h", "w"}
+	letterToReplace1 = []string{"b", "f", "p", "v"}
+	letterToReplace2 = []string{"c", "g", "j", "k", "q", "s", "x", "z"}
+	letterToReplace3 = []string{"d", "t"}
+	letterToReplace4 = []string{"l"}
+	letterToReplace5 = []string{"m", "n"}
+	letterToReplace6 = []string{"r"}
 )
 
 // Create takes a name and returns the corresponding soundex
@@ -61,9 +61,9 @@ func makeLower(name string) (string, error) {
 	return strings.ToLower(name), nil
 }
 
-// ConvertToNumber takes a name and converts each letter to its
+// convertToNumber takes a name and converts each letter to its
 // coresponding numerical value.
-func ConvertToNumber(name string) (bool, error) {
+func convertToNumber(name string) (string, error) {
 
 	// count is the length of name
 	var count int
@@ -73,22 +73,36 @@ func ConvertToNumber(name string) (bool, error) {
 		count++
 	}
 
-	// soundex := make([]rune, count)
+	soundex := make([]string, count)
 
-	// rName is a rune slice made from the string name
-	rName := []rune(name)
-
-	for _, letter := range rName {
-		if Contains(letterToReplace1, letter) {
-			return true, nil
+	// append to soundex the coresponding number for each consentient and also
+	// letters that does not have a matching number. ie vowels, h, and w
+	for _, letter := range name {
+		if contains(letterToReplace1, string(letter)) {
+			soundex = append(soundex, "1")
+		} else if contains(letterToReplace2, string(letter)) {
+			soundex = append(soundex, "2")
+		} else if contains(letterToReplace3, string(letter)) {
+			soundex = append(soundex, "3")
+		} else if contains(letterToReplace4, string(letter)) {
+			soundex = append(soundex, "4")
+		} else if contains(letterToReplace5, string(letter)) {
+			soundex = append(soundex, "5")
+		} else if contains(letterToReplace6, string(letter)) {
+			soundex = append(soundex, "6")
+		} else {
+			soundex = append(soundex, string(letter))
 		}
 	}
 
-	return false, nil
+	// converts soundex back to a string
+	name = strings.Join(soundex, "")
+
+	return name, nil
 }
 
-// Contains checks to see if someting is contained.
-func Contains(slice []rune, letter rune) bool {
+// contains checks to see if a letter is contained within a string slice.
+func contains(slice []string, letter string) bool {
 
 	for _, r := range slice {
 		if letter == r {
@@ -96,5 +110,4 @@ func Contains(slice []rune, letter rune) bool {
 		}
 	}
 	return false
-
 }
