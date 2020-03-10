@@ -27,6 +27,11 @@ var makeLowerTestCases = []struct {
 		expected:    "c",
 	},
 	{
+		description: "makeLower() - One char Uppercased",
+		input:       "C",
+		expected:    "c",
+	},
+	{
 		description:   "makeLower() - No char",
 		input:         "",
 		expected:      "error",
@@ -85,5 +90,33 @@ var makeLowerTestCases = []struct {
 		input:         "John-Smith",
 		expected:      "error",
 		errorExpected: true,
+	},
+}
+
+var ConvertToNumberTestCases = []struct {
+	description   string
+	input         string
+	expected      bool
+	errorExpected bool
+}{
+	{
+		description: "ConvertToNumber() - letterToReplace1 - b",
+		input:       "b",
+		expected:    true,
+	},
+	{
+		description: "ConvertToNumber() - letterToReplace1 - f",
+		input:       "f",
+		expected:    true,
+	},
+	{
+		description: "ConvertToNumber() - letterToReplace1 - p",
+		input:       "p",
+		expected:    true,
+	},
+	{
+		description: "ConvertToNumber() - letterToReplace1 - !j",
+		input:       "j",
+		expected:    false,
 	},
 }
